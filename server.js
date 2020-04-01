@@ -36,6 +36,7 @@ app.get("/", function(req, res) {
 app.get("/api/jokes", function(req, res) {
   fs.readFile("jokes.json", function(err, data) {
     if (err) {
+      res.status(500);
       return res.send("An error occurred retrieving jokes.");
     }
     const retrievedJokesArray = JSON.parse(data);
@@ -53,7 +54,14 @@ app.get("/api/jokes/:id", function(req, res) {
   }
 
   if (index >= 0 && index < jokes.length) {
-    res.json(jokes[index]);
+    fs.readFile("jokes.json", function(err, data) {
+      if (err) {
+          res.status(500);
+        return res.send("An error occurred retrieving jokes.");
+      }
+      const retrievedJokesArray = JSON.parse(data);
+      res.json(retrievedJokesArray[index]);
+    });
   } else {
     res.status(404);
     return res.send("Unable to find a joke with that ID. Please try again");
