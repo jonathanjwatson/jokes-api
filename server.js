@@ -36,6 +36,23 @@ app.get("/api/jokes", function(req, res) {
   res.json(jokes);
 });
 
+app.get("/api/jokes/:id", function(req, res) {
+  const index = parseInt(req.params.id);
+  console.log(index);
+
+  if (isNaN(index)) {
+    res.status(400);
+    return res.send("Please enter a valid id");
+  }
+
+  if (index >= 0 && index < jokes.length) {
+    res.json(jokes[index]);
+  } else {
+    res.status(404);
+    return res.send("Unable to find a joke with that ID. Please try again");
+  }
+});
+
 // STEP 4: TELL THE APP TO LISTEN ON THE PORT
 app.listen(PORT, () => {
   console.log(`Application running on http://localhost:${PORT}`);
