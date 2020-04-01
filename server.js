@@ -1,6 +1,7 @@
 // STEP 1: REQUIRE EXPRESS
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 
 // STEP 2: CREATE AN "APP" INSTANCE OF EXPRESS
 const app = express();
@@ -33,7 +34,13 @@ app.get("/", function(req, res) {
 });
 
 app.get("/api/jokes", function(req, res) {
-  res.json(jokes);
+  fs.readFile("jokes.json", function(err, data) {
+    if (err) {
+      return res.send("An error occurred retrieving jokes.");
+    }
+    const retrievedJokesArray = JSON.parse(data);
+    res.json(retrievedJokesArray);
+  });
 });
 
 app.get("/api/jokes/:id", function(req, res) {

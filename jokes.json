@@ -1,0 +1,17 @@
+[
+  {
+    "intro": "What do you call a skinny ghost?",
+    "punchline": "BOOLEAN.",
+    "rating": 10
+  },
+  {
+    "intro": "Why does Yoda’s code always crash?",
+    "punchline": "Because there is no try.",
+    "rating": 4
+  },
+  {
+    "intro": "I was having a hard time understanding source control…",
+    "punchline": "but i’m starting to git it.",
+    "rating": 7
+  }
+]
