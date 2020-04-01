@@ -6,7 +6,7 @@ const path = require("path");
 const app = express();
 
 // STEP 3: DEFINE A PORT FOR THE APP TO RUN ON
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const jokes = [
   {
