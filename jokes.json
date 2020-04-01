@@ -1,17 +1,1 @@
-[
-  {
-    "intro": "What do you call a skinny ghost?",
-    "punchline": "BOOLEAN.",
-    "rating": 10
-  },
-  {
-    "intro": "Why does Yoda’s code always crash?",
-    "punchline": "Because there is no try.",
-    "rating": 4
-  },
-  {
-    "intro": "I was having a hard time understanding source control…",
-    "punchline": "but i’m starting to git it.",
-    "rating": 7
-  }
-]
+[{"intro":"What do you call a skinny ghost?","punchline":"BOOLEAN.","rating":10},{"intro":"Why does Yoda’s code always crash?","punchline":"Because there is no try.","rating":4},{"intro":"I was having a hard time understanding source control…","punchline":"but i’m starting to git it.","rating":7},{"intro":"Did you hear about the quarantine?","punchline":"It means all my jokes will be inside jokes.","rating":3},{"intro":"Did you know the first French fries weren't actually cooked in France?","punchline":"They were cooked in Greece.","rating":1}]

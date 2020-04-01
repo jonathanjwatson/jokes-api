@@ -9,6 +9,10 @@ const app = express();
 // STEP 3: DEFINE A PORT FOR THE APP TO RUN ON
 const PORT = process.env.PORT || 3000;
 
+// STEP N: INCLUDE MIDDLEWARE SO THAT POSTS GENERATE REQ.BODY
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 const jokes = [
   {
     intro: "What do you call a skinny ghost?",
@@ -53,19 +57,39 @@ app.get("/api/jokes/:id", function(req, res) {
     return res.send("Please enter a valid id");
   }
 
-  if (index >= 0 && index < jokes.length) {
-    fs.readFile("jokes.json", function(err, data) {
-      if (err) {
-          res.status(500);
-        return res.send("An error occurred retrieving jokes.");
-      }
-      const retrievedJokesArray = JSON.parse(data);
+  fs.readFile("jokes.json", function(err, data) {
+    if (err) {
+      res.status(500);
+      return res.send("An error occurred retrieving jokes.");
+    }
+    const retrievedJokesArray = JSON.parse(data);
+    if (index >= 0 && index < retrievedJokesArray.length) {
       res.json(retrievedJokesArray[index]);
+    } else {
+      res.status(404);
+      return res.send("Unable to find a joke with that ID. Please try again");
+    }
+  });
+});
+
+app.post("/api/jokes", function(req, res) {
+  console.log(req.body);
+  fs.readFile("jokes.json", function(err, data) {
+    if (err) {
+      res.status(500);
+      return res.send("An error occurred retrieving jokes.");
+    }
+    const jokesArray = JSON.parse(data);
+    jokesArray.push(req.body);
+    console.log(jokesArray);
+    fs.writeFile("jokes.json", JSON.stringify(jokesArray), function(err) {
+      if (err) {
+        res.status(500);
+        return res.send("An error occurred saving your joke.");
+      }
+      res.send("Your joke was successfully created");
     });
-  } else {
-    res.status(404);
-    return res.send("Unable to find a joke with that ID. Please try again");
-  }
+  });
 });
 
 // STEP 4: TELL THE APP TO LISTEN ON THE PORT
