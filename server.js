@@ -59,6 +59,7 @@ app.get("/api/jokes/:id", function(req, res) {
 
   fs.readFile("jokes.json", function(err, data) {
     if (err) {
+        console.log(err);
       res.status(500);
       return res.send("An error occurred retrieving jokes.");
     }
